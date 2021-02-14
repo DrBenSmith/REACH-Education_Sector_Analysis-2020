@@ -31,6 +31,12 @@ hh <- read.csv("02 - Inputs/Household Surveys - BGD2006_Education_Caregivers_Fin
                na.strings = c(""," ","NA","N/A"), 
                stringsAsFactors = F) %>% rename("X_uuid" = "_uuid")
 
+# Check that the "access_to_electricity" and "access_to_internet" are as hrs, not dates (auto conversion in excel):
+table(hh[,c("access_to_electricity", "access_to_internet_connection")])
+  # Assuming these are read in correctly, change the '-' to '_to_' so that excel doesn't auto-format the outputs:
+  hh[,"access_to_electricity"] = gsub("-", "_to_", hh[,"access_to_electricity"])
+  hh[,"access_to_internet_connection"] = gsub("-", "_to_", hh[,"access_to_internet_connection"])
+  
 # Individual Response Data:
 indv <- read.csv("02 - Inputs/Individual Surveys - BGD2006_Education_Caregivers_Final - all_versions_-_False_-_2021-01-31-10-10-59.csv", 
                  check.names =FALSE,
@@ -116,10 +122,11 @@ indv_clean_data <- implement_cleaning_log(df = indv,
 # Filter the data to only household surveys that were removed:
 # Added following second round of surveys to remove the individual responses related to the household surveys that were removed.
 # This was not used in the first round of scripts as the individual surveys were manually added to the cleaning log.
-cleaning_log_indv  <- filter(cleaning_log, dataset_loop== "household" & change_type == "remove_survey" & spotted_by == "Daria" & question == "survey duration")
+cleaning_log_indv  <- filter(cleaning_log, dataset_loop== "household" & change_type == "remove_survey"
+                             & spotted_by == "Daria" & question == "survey duration")
 
 # Change values according to the cleaning log:
-indv_clean_data2 <- implement_cleaning_log(df = indv,
+indv_clean_data <- implement_cleaning_log(df = indv_clean_data,
                                           df_uuid = "X_uuid",
                                           cl = cleaning_log_indv,
                                           cl_change_type_col ="change_type",

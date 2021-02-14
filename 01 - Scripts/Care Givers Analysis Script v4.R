@@ -51,7 +51,7 @@ DAP <- read.xlsx(xlsxFile = "07 - Other/CAREGIVER-SURVEY_DA instructions_v3.xlsx
                  colNames = TRUE, rowNames = FALSE)
 
 # Do you want the results to be collated onto a single page?
-collate = FALSE # or FALSE
+collate = FALSE # or TRUE # Not yet fully coded.
 
 # Weightings --------------------------------------------------------------
   
@@ -220,4 +220,6 @@ collate = FALSE # or FALSE
   
   }
   
-  write.xlsx(indv_results, paste0("03 - Outputs/04_basic_analysis/", str_replace_all(Sys.Date(),"-","_"), "_indv_analysis.xlsx"), row.names = TRUE)
+  write.xlsx(indv_results, 
+             paste0("03 - Outputs/04_basic_analysis/", str_replace_all(Sys.Date(),"-","_"), "_indv_analysis.xlsx"), 
+             row.names = TRUE)
