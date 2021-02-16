@@ -21,26 +21,27 @@ library(tidyr)
 write_output <-c("yes","no")[1]
 
 # Set the directory:
-setwd("C:/Users/Ben SMITH/Documents/Bangladesh/Projects/Education Sector Assessment/")
+setwd("C:/Users/Ben SMITH/Documents/Bangladesh/REACH Projects/REACH-Education_Sector_Analysis-2020/")
 
 # Read in the raw data ----------------------------------------------------
 
 # Household Response Data:
-hh <- read.csv("02 - Inputs/Household Survey Responses - BGD2006_Education_Caregivers_Final - all_versions - english - 2020-12-06 - 08-54-30.csv", 
+hh <- read.csv("02 - Inputs/Household Surveys - BGD2006_Education_Caregivers_Final - all_versions_-_False_-_2021-01-31-10-10-59.csv", 
                check.names =FALSE,
                na.strings = c(""," ","NA","N/A"), 
                stringsAsFactors = F) %>% rename("X_uuid" = "_uuid")
 
 # Individual Response Data:
-indv <- read.csv("02 - Inputs/Individual Survey Responses - BGD2006_Education_Caregivers_Final - all_versions - english - 2020-12-06 - 08-54-30.csv", 
+indv <- read.csv("02 - Inputs/Individual Surveys - BGD2006_Education_Caregivers_Final - all_versions_-_False_-_2021-01-31-10-10-59.csv", 
                  check.names =FALSE,
                  na.strings = c("", " ", "NA", "N/A"), 
                  stringsAsFactors = F) %>% rename("X_uuid" = "_submission__uuid")
 
 
 # The Cleaning log:
-cleaning_log <- read.xlsx("02 - Inputs/20201130_Data_cleaning_logbook_v4.xlsx",
+cleaning_log <- read.xlsx("02 - Inputs/20210302_Data_cleaning_logbook_v6.xlsx",
                           na.strings = c(""," ","NA","N/A"))
+
 # # hh uuid that need removing from indv:
 # indv_remove = c("5f70fe4f-dd06-49a5-9ff5-e1dc592d9409",
 #                 "f13fff68-9c18-47be-bab6-6d49926a09d9",
@@ -64,16 +65,16 @@ cleaning_log <- read.xlsx("02 - Inputs/20201130_Data_cleaning_logbook_v4.xlsx",
 
 # Clean the Household responses:
 # Filter the cleaning data to only household:
-cleaning_log_hh <- filter(cleaning_log, dataset_loop== "household" & change_type != "no_action")
+cleaning_log_hh <- filter(cleaning_log, dataset_loop == "household" & change_type != "no_action")
 
 # # Check the cleaning log for potential issues:
-# View(check_cleaning_log(df = hh, 
-#                         df_uuid = "X_uuid", 
-#                         cl = cleaning_log_hh, 
-#                         cl_change_type_col ="change_type", 
-#                         cl_change_col ="question", 
-#                         cl_uuid = "uuid",
-#                         cl_new_val = "new_value"))
+View(check_cleaning_log(df = hh,
+                        df_uuid = "X_uuid",
+                        cl = cleaning_log_hh,
+                        cl_change_type_col ="change_type",
+                        cl_change_col ="question",
+                        cl_uuid = "uuid",
+                        cl_new_val = "new_value"))
 
 # Change values according to the cleaning log:
 hh_clean_data <- implement_cleaning_log(df = hh,
