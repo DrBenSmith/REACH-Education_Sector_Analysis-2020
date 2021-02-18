@@ -45,7 +45,7 @@ indv <- read.csv("02 - Inputs/Individual Surveys - BGD2006_Education_Caregivers_
 
 
 # The Cleaning log:
-cleaning_log <- read.xlsx("02 - Inputs/20210302_Data_cleaning_logbook_v6.xlsx",
+cleaning_log <- read.xlsx("02 - Inputs/20210302_Data_cleaning_logbook_v7.xlsx",
                           na.strings = c(""," ","NA","N/A"))
 
 # # hh uuid that need removing from indv:
