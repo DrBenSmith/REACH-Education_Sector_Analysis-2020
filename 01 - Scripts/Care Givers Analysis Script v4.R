@@ -36,12 +36,12 @@ setwd("C:/Users/Ben SMITH/Documents/Bangladesh/REACH Projects/REACH-Education_Se
 
 # Or load it in directly:
 hh <- read.csv(
-  file = "03 - Outputs/02_clean_data/2021_02_11_hh_cleaned_data_with_consent.csv",
+  file = "03 - Outputs/02_clean_data/2021_02_18_hh_cleaned_data_with_consent.csv",
   na.strings = c(""," ","NA","N/A"),
   stringsAsFactors = FALSE)
 
 indv = read.csv(
-  file = "03 - Outputs/03_composite_indicators_with_data/Individual data - cleaned data with composite indicators - 2021_02_11.csv",
+  file = "03 - Outputs/03_composite_indicators_with_data/Individual data - cleaned data with composite indicators - 2021_02_18.csv",
   na.strings = c(""," ","NA","N/A"),
   stringsAsFactors = FALSE)
 
